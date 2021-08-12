@@ -1,11 +1,11 @@
 package src.datastructures;
 
-public abstract class IsiSymbol {
+public abstract class compiladorSymbol {
 	
 	protected String name;
 	
 	public abstract String generateJavaCode();
-	public IsiSymbol(String name) {
+	public compiladorSymbol(String name) {
 		this.name = name;
 		
 	}
@@ -23,7 +23,7 @@ public abstract class IsiSymbol {
 
 	@Override
 	public String toString() {
-		return "IsiSymbol [name=" + name + "]";
+		return "compiladorSymbol [name=" + name + "]";
 	}
 	
 	

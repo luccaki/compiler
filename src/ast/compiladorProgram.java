@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-import src.datastructures.IsiSymbol;
-import src.datastructures.IsiSymbolTable;
+import src.datastructures.compiladorSymbol;
+import src.datastructures.compiladorSymbolTable;
 
-public class IsiProgram {
-	private IsiSymbolTable varTable;
+public class compiladorProgram {
+	private compiladorSymbolTable varTable;
 	private ArrayList<AbstractCommand> comandos;
 	private String programName;
 
@@ -18,7 +18,7 @@ public class IsiProgram {
 		str.append("public class MainClass{ \n");
 		str.append("  public static void main(String args[]){\n ");
 		str.append("      Scanner _key = new Scanner(System.in);\n");
-		for (IsiSymbol symbol: varTable.getAll()) {
+		for (compiladorSymbol symbol: varTable.getAll()) {
 			str.append(symbol.generateJavaCode()+"\n");
 		}
 		for (AbstractCommand command: comandos) {
@@ -38,11 +38,11 @@ public class IsiProgram {
 
 	}
 
-	public IsiSymbolTable getVarTable() {
+	public compiladorSymbolTable getVarTable() {
 		return varTable;
 	}
 
-	public void setVarTable(IsiSymbolTable varTable) {
+	public void setVarTable(compiladorSymbolTable varTable) {
 		this.varTable = varTable;
 	}
 

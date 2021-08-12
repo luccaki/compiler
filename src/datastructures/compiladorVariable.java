@@ -1,6 +1,6 @@
 package src.datastructures;
 
-public class IsiVariable extends IsiSymbol {
+public class compiladorVariable extends compiladorSymbol {
 	
 	public static final int NUMBER=0;
 	public static final int TEXT  =1;
@@ -8,7 +8,7 @@ public class IsiVariable extends IsiSymbol {
 	private int type;
 	private String value;
 	
-	public IsiVariable(String name, int type, String value) {
+	public compiladorVariable(String name, int type, String value) {
 		super(name);
 		this.type = type;
 		this.value = value;
@@ -32,7 +32,7 @@ public class IsiVariable extends IsiSymbol {
 
 	@Override
 	public String toString() {
-		return "IsiVariable [name=" + name + ", type=" + type + ", value=" + value + "]";
+		return "compiladorVariable [name=" + name + ", type=" + type + ", value=" + value + "]";
 	}
 	
 	public String generateJavaCode() {

@@ -1,10 +1,11 @@
-// Generated from c:\Users\lucca\Desktop\Compilador\IsiLang.g4 by ANTLR 4.8
+// Generated from compilador.g4 by ANTLR 4.7.1
+package src.parser;
 
-	import src.datastructures.IsiSymbol;
-	import src.datastructures.IsiVariable;
-	import src.datastructures.IsiSymbolTable;
-	import src.exceptions.IsiSemanticException;
-	import src.ast.IsiProgram;
+	import src.datastructures.compiladorSymbol;
+	import src.datastructures.compiladorVariable;
+	import src.datastructures.compiladorSymbolTable;
+	import src.exceptions.compiladorException;
+	import src.ast.compiladorProgram;
 	import src.ast.AbstractCommand;
 	import src.ast.CommandLeitura;
 	import src.ast.CommandEscrita;
@@ -23,8 +24,8 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class IsiLangParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
+public class compiladorParser extends Parser {
+	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -37,28 +38,19 @@ public class IsiLangParser extends Parser {
 		RULE_prog = 0, RULE_decl = 1, RULE_declaravar = 2, RULE_tipo = 3, RULE_bloco = 4, 
 		RULE_cmd = 5, RULE_cmdleitura = 6, RULE_cmdescrita = 7, RULE_cmdattrib = 8, 
 		RULE_cmdselecao = 9, RULE_expr = 10, RULE_termo = 11;
-	private static String[] makeRuleNames() {
-		return new String[] {
-			"prog", "decl", "declaravar", "tipo", "bloco", "cmd", "cmdleitura", "cmdescrita", 
-			"cmdattrib", "cmdselecao", "expr", "termo"
-		};
-	}
-	public static final String[] ruleNames = makeRuleNames();
+	public static final String[] ruleNames = {
+		"prog", "decl", "declaravar", "tipo", "bloco", "cmd", "cmdleitura", "cmdescrita", 
+		"cmdattrib", "cmdselecao", "expr", "termo"
+	};
 
-	private static String[] makeLiteralNames() {
-		return new String[] {
-			null, "'programa'", "'fimprog;'", "'numero'", "'texto'", "'leia'", "'escreva'", 
-			"'se'", "'senao'", "'('", "')'", "';'", null, "'='", "','", "'{'", "'}'"
-		};
-	}
-	private static final String[] _LITERAL_NAMES = makeLiteralNames();
-	private static String[] makeSymbolicNames() {
-		return new String[] {
-			null, null, null, null, null, null, null, null, null, "AP", "FP", "SC", 
-			"OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", "ID", "NUMBER", "WS"
-		};
-	}
-	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
+	private static final String[] _LITERAL_NAMES = {
+		null, "'programa'", "'fimprog;'", "'numero'", "'texto'", "'leia'", "'escreva'", 
+		"'se'", "'senao'", "'('", "')'", "';'", null, "'='", "','", "'{'", "'}'"
+	};
+	private static final String[] _SYMBOLIC_NAMES = {
+		null, null, null, null, null, null, null, null, null, "AP", "FP", "SC", 
+		"OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", "ID", "NUMBER", "WS"
+	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
@@ -93,7 +85,7 @@ public class IsiLangParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "IsiLang.g4"; }
+	public String getGrammarFileName() { return "compilador.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -108,9 +100,9 @@ public class IsiLangParser extends Parser {
 		private int _tipo;
 		private String _varName;
 		private String _varValue;
-		private IsiSymbolTable symbolTable = new IsiSymbolTable();
-		private IsiSymbol symbol;
-		private IsiProgram program = new IsiProgram();
+		private compiladorSymbolTable symbolTable = new compiladorSymbolTable();
+		private compiladorSymbol symbol;
+		private compiladorProgram program = new compiladorProgram();
 		private ArrayList<AbstractCommand> curThread;
 		private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 		private String _readID;
@@ -123,7 +115,7 @@ public class IsiLangParser extends Parser {
 		
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
-				throw new IsiSemanticException("Symbol "+id+" not declared");
+				throw new compiladorException("Symbol "+id+" not declared");
 			}
 		}
 		
@@ -137,11 +129,10 @@ public class IsiLangParser extends Parser {
 			program.generateTarget();
 		}
 
-	public IsiLangParser(TokenStream input) {
+	public compiladorParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
-
 	public static class ProgContext extends ParserRuleContext {
 		public DeclContext decl() {
 			return getRuleContext(DeclContext.class,0);
@@ -153,6 +144,14 @@ public class IsiLangParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_prog; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterProg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitProg(this);
+		}
 	}
 
 	public final ProgContext prog() throws RecognitionException {
@@ -197,6 +196,14 @@ public class IsiLangParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_decl; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterDecl(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitDecl(this);
+		}
 	}
 
 	public final DeclContext decl() throws RecognitionException {
@@ -237,19 +244,27 @@ public class IsiLangParser extends Parser {
 		public TipoContext tipo() {
 			return getRuleContext(TipoContext.class,0);
 		}
-		public List<TerminalNode> ID() { return getTokens(IsiLangParser.ID); }
+		public List<TerminalNode> ID() { return getTokens(compiladorParser.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(IsiLangParser.ID, i);
+			return getToken(compiladorParser.ID, i);
 		}
-		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
-		public List<TerminalNode> VIR() { return getTokens(IsiLangParser.VIR); }
+		public TerminalNode SC() { return getToken(compiladorParser.SC, 0); }
+		public List<TerminalNode> VIR() { return getTokens(compiladorParser.VIR); }
 		public TerminalNode VIR(int i) {
-			return getToken(IsiLangParser.VIR, i);
+			return getToken(compiladorParser.VIR, i);
 		}
 		public DeclaravarContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declaravar; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterDeclaravar(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitDeclaravar(this);
+		}
 	}
 
 	public final DeclaravarContext declaravar() throws RecognitionException {
@@ -266,12 +281,12 @@ public class IsiLangParser extends Parser {
 
 				                  _varName = _input.LT(-1).getText();
 				                  _varValue = null;
-				                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+				                  symbol = new compiladorVariable(_varName, _tipo, _varValue);
 				                  if (!symbolTable.exists(_varName)){
 				                     symbolTable.add(symbol);	
 				                  }
 				                  else{
-				                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
+				                  	 throw new compiladorException("Symbol "+_varName+" already declared");
 				                  }
 			                    
 			setState(43);
@@ -287,12 +302,12 @@ public class IsiLangParser extends Parser {
 
 					                  _varName = _input.LT(-1).getText();
 					                  _varValue = null;
-					                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+					                  symbol = new compiladorVariable(_varName, _tipo, _varValue);
 					                  if (!symbolTable.exists(_varName)){
 					                     symbolTable.add(symbol);	
 					                  }
 					                  else{
-					                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
+					                  	 throw new compiladorException("Symbol "+_varName+" already declared");
 					                  }
 				                    
 				}
@@ -321,6 +336,14 @@ public class IsiLangParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_tipo; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterTipo(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitTipo(this);
+		}
 	}
 
 	public final TipoContext tipo() throws RecognitionException {
@@ -335,7 +358,7 @@ public class IsiLangParser extends Parser {
 				{
 				setState(48);
 				match(T__2);
-				 _tipo = IsiVariable.NUMBER;  
+				 _tipo = compiladorVariable.NUMBER;  
 				}
 				break;
 			case T__3:
@@ -343,7 +366,7 @@ public class IsiLangParser extends Parser {
 				{
 				setState(50);
 				match(T__3);
-				 _tipo = IsiVariable.TEXT;  
+				 _tipo = compiladorVariable.TEXT;  
 				}
 				break;
 			default:
@@ -372,6 +395,14 @@ public class IsiLangParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bloco; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterBloco(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitBloco(this);
+		}
 	}
 
 	public final BlocoContext bloco() throws RecognitionException {
@@ -428,6 +459,14 @@ public class IsiLangParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmd; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterCmd(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitCmd(this);
+		}
 	}
 
 	public final CmdContext cmd() throws RecognitionException {
@@ -481,14 +520,22 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdleituraContext extends ParserRuleContext {
-		public TerminalNode AP() { return getToken(IsiLangParser.AP, 0); }
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
-		public TerminalNode FP() { return getToken(IsiLangParser.FP, 0); }
-		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
+		public TerminalNode AP() { return getToken(compiladorParser.AP, 0); }
+		public TerminalNode ID() { return getToken(compiladorParser.ID, 0); }
+		public TerminalNode FP() { return getToken(compiladorParser.FP, 0); }
+		public TerminalNode SC() { return getToken(compiladorParser.SC, 0); }
 		public CmdleituraContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdleitura; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterCmdleitura(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitCmdleitura(this);
+		}
 	}
 
 	public final CmdleituraContext cmdleitura() throws RecognitionException {
@@ -511,7 +558,7 @@ public class IsiLangParser extends Parser {
 			setState(71);
 			match(SC);
 
-			              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+			              	compiladorVariable var = (compiladorVariable)symbolTable.get(_readID);
 			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
 			              	stack.peek().add(cmd);
 			              
@@ -529,14 +576,22 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdescritaContext extends ParserRuleContext {
-		public TerminalNode AP() { return getToken(IsiLangParser.AP, 0); }
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
-		public TerminalNode FP() { return getToken(IsiLangParser.FP, 0); }
-		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
+		public TerminalNode AP() { return getToken(compiladorParser.AP, 0); }
+		public TerminalNode ID() { return getToken(compiladorParser.ID, 0); }
+		public TerminalNode FP() { return getToken(compiladorParser.FP, 0); }
+		public TerminalNode SC() { return getToken(compiladorParser.SC, 0); }
 		public CmdescritaContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdescrita; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterCmdescrita(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitCmdescrita(this);
+		}
 	}
 
 	public final CmdescritaContext cmdescrita() throws RecognitionException {
@@ -576,16 +631,24 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdattribContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
-		public TerminalNode ATTR() { return getToken(IsiLangParser.ATTR, 0); }
+		public TerminalNode ID() { return getToken(compiladorParser.ID, 0); }
+		public TerminalNode ATTR() { return getToken(compiladorParser.ATTR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode SC() { return getToken(IsiLangParser.SC, 0); }
+		public TerminalNode SC() { return getToken(compiladorParser.SC, 0); }
 		public CmdattribContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdattrib; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterCmdattrib(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitCmdattrib(this);
+		}
 	}
 
 	public final CmdattribContext cmdattrib() throws RecognitionException {
@@ -624,22 +687,22 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class CmdselecaoContext extends ParserRuleContext {
-		public TerminalNode AP() { return getToken(IsiLangParser.AP, 0); }
-		public List<TerminalNode> ID() { return getTokens(IsiLangParser.ID); }
+		public TerminalNode AP() { return getToken(compiladorParser.AP, 0); }
+		public List<TerminalNode> ID() { return getTokens(compiladorParser.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(IsiLangParser.ID, i);
+			return getToken(compiladorParser.ID, i);
 		}
-		public TerminalNode OPREL() { return getToken(IsiLangParser.OPREL, 0); }
-		public TerminalNode FP() { return getToken(IsiLangParser.FP, 0); }
-		public List<TerminalNode> ACH() { return getTokens(IsiLangParser.ACH); }
+		public TerminalNode OPREL() { return getToken(compiladorParser.OPREL, 0); }
+		public TerminalNode FP() { return getToken(compiladorParser.FP, 0); }
+		public List<TerminalNode> ACH() { return getTokens(compiladorParser.ACH); }
 		public TerminalNode ACH(int i) {
-			return getToken(IsiLangParser.ACH, i);
+			return getToken(compiladorParser.ACH, i);
 		}
-		public List<TerminalNode> FCH() { return getTokens(IsiLangParser.FCH); }
+		public List<TerminalNode> FCH() { return getTokens(compiladorParser.FCH); }
 		public TerminalNode FCH(int i) {
-			return getToken(IsiLangParser.FCH, i);
+			return getToken(compiladorParser.FCH, i);
 		}
-		public TerminalNode NUMBER() { return getToken(IsiLangParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(compiladorParser.NUMBER, 0); }
 		public List<CmdContext> cmd() {
 			return getRuleContexts(CmdContext.class);
 		}
@@ -650,6 +713,14 @@ public class IsiLangParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdselecao; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterCmdselecao(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitCmdselecao(this);
+		}
 	}
 
 	public final CmdselecaoContext cmdselecao() throws RecognitionException {
@@ -765,14 +836,22 @@ public class IsiLangParser extends Parser {
 		public TermoContext termo(int i) {
 			return getRuleContext(TermoContext.class,i);
 		}
-		public List<TerminalNode> OP() { return getTokens(IsiLangParser.OP); }
+		public List<TerminalNode> OP() { return getTokens(compiladorParser.OP); }
 		public TerminalNode OP(int i) {
-			return getToken(IsiLangParser.OP, i);
+			return getToken(compiladorParser.OP, i);
 		}
 		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitExpr(this);
+		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -815,12 +894,20 @@ public class IsiLangParser extends Parser {
 	}
 
 	public static class TermoContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
-		public TerminalNode NUMBER() { return getToken(IsiLangParser.NUMBER, 0); }
+		public TerminalNode ID() { return getToken(compiladorParser.ID, 0); }
+		public TerminalNode NUMBER() { return getToken(compiladorParser.NUMBER, 0); }
 		public TermoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_termo; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).enterTermo(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof compiladorListener ) ((compiladorListener)listener).exitTermo(this);
+		}
 	}
 
 	public final TermoContext termo() throws RecognitionException {

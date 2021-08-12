@@ -1,6 +1,6 @@
 package src.ast;
 
-import src.datastructures.IsiVariable;
+import src.datastructures.compiladorVariable;
 
 public class CommandAtribuicao extends AbstractCommand{
 

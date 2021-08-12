@@ -1,11 +1,11 @@
-grammar IsiLang;
+grammar compilador;
 
 @header{
-	import src.datastructures.IsiSymbol;
-	import src.datastructures.IsiVariable;
-	import src.datastructures.IsiSymbolTable;
-	import src.exceptions.IsiSemanticException;
-	import src.ast.IsiProgram;
+	import src.datastructures.compiladorSymbol;
+	import src.datastructures.compiladorVariable;
+	import src.datastructures.compiladorSymbolTable;
+	import src.exceptions.compiladorSemanticException;
+	import src.ast.compiladorProgram;
 	import src.ast.AbstractCommand;
 	import src.ast.CommandLeitura;
 	import src.ast.CommandEscrita;
@@ -19,9 +19,9 @@ grammar IsiLang;
 	private int _tipo;
 	private String _varName;
 	private String _varValue;
-	private IsiSymbolTable symbolTable = new IsiSymbolTable();
-	private IsiSymbol symbol;
-	private IsiProgram program = new IsiProgram();
+	private compiladorSymbolTable symbolTable = new compiladorSymbolTable();
+	private compiladorSymbol symbol;
+	private compiladorProgram program = new compiladorProgram();
 	private ArrayList<AbstractCommand> curThread;
 	private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 	private String _readID;
@@ -34,7 +34,7 @@ grammar IsiLang;
 	
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
-			throw new IsiSemanticException("Symbol "+id+" not declared");
+			throw new compiladorSemanticException("Symbol "+id+" not declared");
 		}
 	}
 	
@@ -63,32 +63,32 @@ decl    :  (declaravar)+
 declaravar :  tipo ID  {
 	                  _varName = _input.LT(-1).getText();
 	                  _varValue = null;
-	                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+	                  symbol = new compiladorVariable(_varName, _tipo, _varValue);
 	                  if (!symbolTable.exists(_varName)){
 	                     symbolTable.add(symbol);	
 	                  }
 	                  else{
-	                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
+	                  	 throw new compiladorSemanticException("Symbol "+_varName+" already declared");
 	                  }
                     } 
               (  VIR 
               	 ID {
 	                  _varName = _input.LT(-1).getText();
 	                  _varValue = null;
-	                  symbol = new IsiVariable(_varName, _tipo, _varValue);
+	                  symbol = new compiladorVariable(_varName, _tipo, _varValue);
 	                  if (!symbolTable.exists(_varName)){
 	                     symbolTable.add(symbol);	
 	                  }
 	                  else{
-	                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
+	                  	 throw new compiladorSemanticException("Symbol "+_varName+" already declared");
 	                  }
                     }
               )* 
                SC
            ;
            
-tipo       : 'numero' { _tipo = IsiVariable.NUMBER;  }
-           | 'texto'  { _tipo = IsiVariable.TEXT;  }
+tipo       : 'numero' { _tipo = compiladorVariable.NUMBER;  }
+           | 'texto'  { _tipo = compiladorVariable.TEXT;  }
            ;
         
 bloco	: { curThread = new ArrayList<AbstractCommand>(); 
@@ -112,7 +112,7 @@ cmdleitura	: 'leia' AP
                      SC 
                      
               {
-              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+              	compiladorVariable var = (compiladorVariable)symbolTable.get(_readID);
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
               	stack.peek().add(cmd);
               }   

@@ -1,11 +1,10 @@
-// Generated from IsiLang.g4 by ANTLR 4.7.1
-package src.parser;
+// Generated from c:\Users\lucca\Desktop\compiler\compilador.g4 by ANTLR 4.8
 
-	import src.datastructures.IsiSymbol;
-	import src.datastructures.IsiVariable;
-	import src.datastructures.IsiSymbolTable;
-	import src.exceptions.IsiSemanticException;
-	import src.ast.IsiProgram;
+	import src.datastructures.compiladorSymbol;
+	import src.datastructures.compiladorVariable;
+	import src.datastructures.compiladorSymbolTable;
+	import src.exceptions.compiladorSemanticException;
+	import src.ast.compiladorProgram;
 	import src.ast.AbstractCommand;
 	import src.ast.CommandLeitura;
 	import src.ast.CommandEscrita;
@@ -24,8 +23,8 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class IsiLangLexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
+public class compiladorLexer extends Lexer {
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -42,20 +41,29 @@ public class IsiLangLexer extends Lexer {
 		"DEFAULT_MODE"
 	};
 
-	public static final String[] ruleNames = {
-		"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "AP", 
-		"FP", "SC", "OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", "ID", "NUMBER", 
-		"WS"
-	};
+	private static String[] makeRuleNames() {
+		return new String[] {
+			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "AP", 
+			"FP", "SC", "OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", "ID", "NUMBER", 
+			"WS"
+		};
+	}
+	public static final String[] ruleNames = makeRuleNames();
 
-	private static final String[] _LITERAL_NAMES = {
-		null, "'programa'", "'fimprog;'", "'numero'", "'texto'", "'leia'", "'escreva'", 
-		"'se'", "'senao'", "'('", "')'", "';'", null, "'='", "','", "'{'", "'}'"
-	};
-	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, null, "AP", "FP", "SC", 
-		"OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", "ID", "NUMBER", "WS"
-	};
+	private static String[] makeLiteralNames() {
+		return new String[] {
+			null, "'programa'", "'fimprog;'", "'numero'", "'texto'", "'leia'", "'escreva'", 
+			"'se'", "'senao'", "'('", "')'", "';'", null, "'='", "','", "'{'", "'}'"
+		};
+	}
+	private static final String[] _LITERAL_NAMES = makeLiteralNames();
+	private static String[] makeSymbolicNames() {
+		return new String[] {
+			null, null, null, null, null, null, null, null, null, "AP", "FP", "SC", 
+			"OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", "ID", "NUMBER", "WS"
+		};
+	}
+	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
@@ -93,9 +101,9 @@ public class IsiLangLexer extends Lexer {
 		private int _tipo;
 		private String _varName;
 		private String _varValue;
-		private IsiSymbolTable symbolTable = new IsiSymbolTable();
-		private IsiSymbol symbol;
-		private IsiProgram program = new IsiProgram();
+		private compiladorSymbolTable symbolTable = new compiladorSymbolTable();
+		private compiladorSymbol symbol;
+		private compiladorProgram program = new compiladorProgram();
 		private ArrayList<AbstractCommand> curThread;
 		private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 		private String _readID;
@@ -108,7 +116,7 @@ public class IsiLangLexer extends Lexer {
 		
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
-				throw new IsiSemanticException("Symbol "+id+" not declared");
+				throw new compiladorSemanticException("Symbol "+id+" not declared");
 			}
 		}
 		
@@ -123,13 +131,13 @@ public class IsiLangLexer extends Lexer {
 		}
 
 
-	public IsiLangLexer(CharStream input) {
+	public compiladorLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "IsiLang.g4"; }
+	public String getGrammarFileName() { return "compilador.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

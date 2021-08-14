@@ -37,7 +37,6 @@ public class compiladorProgram {
 		String TextoComandos = "";
 		for (AbstractCommand aux : comandos) {
 			TextoComandos += aux.toString();
-			System.out.println(aux.toString());
 		}
 
 		for (compiladorSymbol aux : varTable.getAll()) {
@@ -48,27 +47,32 @@ public class compiladorProgram {
 				throw new compiladorSemanticException("Symbol "+ aux.getName() +" not used");
 		}
 
-		//for (AbstractCommand aux : comandos) {
-		//	if(aux.getClass() == new CommandAtribuicao("","").getClass()){
-		//		CommandAtribuicao cmdatr = (CommandAtribuicao) aux;
-		//		String id = cmdatr.GetId();
-		//		String expr = cmdatr.GetExpr();
-		//		Pattern patternTexto = Pattern.compile("\".*\"", Pattern.CASE_INSENSITIVE);
-		//		Pattern patternNumero = Pattern.compile("id="+aux.getName()+"[^a-zA-Z0-9]", Pattern.CASE_INSENSITIVE);
-    	//		Matcher matcher = pattern.matcher(expr);
-    	//		boolean matchFound = matcher.find();
-		//		int tipo;
-    	//		if(matchFound)
-		//			tipo = 1;
-		//		else
-		//			tipo = 0;
-		//		for (compiladorSymbol auxVar : varTable.getAll()) {
-		//			compiladorVariable compVar = (compiladorVariable) auxVar;
-		//			if(id == compVar.getName()){
-		//			}
-		//		}
-		//	}
-		//}
+		for (AbstractCommand aux : comandos) {
+			if(aux.getClass() == new CommandAtribuicao("","").getClass()){
+				CommandAtribuicao cmdatr = (CommandAtribuicao) aux;
+				String id = cmdatr.GetId();
+				String expr = cmdatr.GetExpr();
+				Pattern patternTexto = Pattern.compile("\".*\"", Pattern.CASE_INSENSITIVE);
+				Pattern patternNumero = Pattern.compile("^[0-9]*.?[0-9]*$", Pattern.CASE_INSENSITIVE);
+    			Matcher matcherTexto = patternTexto.matcher(expr);
+    			Matcher matcherNumero = patternNumero.matcher(expr);
+    			boolean matchFoundTexto = matcherTexto.find();
+    			boolean matchFoundNumero = matcherNumero.find();
+				int tipo = 100;
+    			if(matchFoundTexto)
+					tipo = 1;
+				else if(matchFoundNumero)
+					tipo = 0;
+				else
+					throw new compiladorSemanticException("Symbol "+ id +" does not support "+ expr);
+				for (compiladorSymbol auxVar : varTable.getAll()) {
+					compiladorVariable compVar = (compiladorVariable) auxVar;
+					if(id.equals(compVar.getName()) && tipo != compVar.getType()){
+						throw new compiladorSemanticException("Symbol "+ id +" does not support "+ expr);
+					}
+				}
+			}
+		}
 		
 		try {
 			FileWriter fr = new FileWriter(new File("MainClass.java"));

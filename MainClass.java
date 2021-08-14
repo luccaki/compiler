@@ -7,11 +7,12 @@ double  b;
 String  t;
 a= _key.nextDouble();
 b= _key.nextDouble();
+t = "teste";
 while (a<b) {
 a = a+1;System.out.println(a);}
 
-a = 2.1;
-System.out.println(t);
-System.out.println(a);
-System.out.println(b);
+if (a==b) {
+System.out.println(t);}else {
+System.out.println(b);}
+
   }}

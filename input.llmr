@@ -1,20 +1,23 @@
-programa
+inicio
 
   numero a, b;
   texto t;
   
   leia(a);
   leia(b);
+
+  t = "teste"; 
   
   enquanto(a < b){
     a = a + 1;
     escreva(a);
   }
 
-  a = 2.1;
+  
+  se (a == b){
+    escreva(t);
+  }senao{
+    escreva(b);
+  }
 
-  escreva(t);
-  escreva(a);
-  escreva(b);
-
-fimprog;
+fim

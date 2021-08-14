@@ -51,7 +51,7 @@ grammar compilador;
 	}
 }
 
-prog	: 'programa' decl bloco  'fimprog;'
+prog	: 'inicio' decl bloco  'fim'
            {  program.setVarTable(symbolTable);
            	  program.setComandos(stack.pop());
 
@@ -210,6 +210,11 @@ termo		: ID { verificaID(_input.LT(-1).getText());
               NUMBER
               {
               	_exprContent += _input.LT(-1).getText();
+              } 
+            | 
+              TEXT
+              {
+              	_exprContent += _input.LT(-1).getText();
               }
 			;
 			
@@ -246,6 +251,9 @@ ID	: [a-z] ([a-z] | [A-Z] | [0-9])*
 	;
 	
 NUMBER	: [0-9]+ ('.' [0-9]+)?
+		;
+
+TEXT	: ('"')('a'..'z' | 'A'..'Z' | '0'..'9' | ' ' | ',' | ':' | '?' | '!')* ('"')
 		;
 		
 WS	: (' ' | '\t' | '\n' | '\r') -> skip;

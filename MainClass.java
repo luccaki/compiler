@@ -4,13 +4,14 @@ public class MainClass{
        Scanner _key = new Scanner(System.in);
 double  a;
 double  b;
-String  t1;
+String  t;
 a= _key.nextDouble();
 b= _key.nextDouble();
-t1= _key.nextLine();
-System.out.println(t1);
-if (a>b) {
-System.out.println(a);}else {
-System.out.println(b);}
+while (a<b) {
+a = a+1;System.out.println(a);}
 
+a = 2.1;
+System.out.println(t);
+System.out.println(a);
+System.out.println(b);
   }}

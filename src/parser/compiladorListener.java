@@ -4,13 +4,14 @@ package src.parser;
 	import src.datastructures.compiladorSymbol;
 	import src.datastructures.compiladorVariable;
 	import src.datastructures.compiladorSymbolTable;
-	import src.exceptions.compiladorException;
+	import src.exceptions.compiladorSemanticException;
 	import src.ast.compiladorProgram;
 	import src.ast.AbstractCommand;
 	import src.ast.CommandLeitura;
 	import src.ast.CommandEscrita;
 	import src.ast.CommandAtribuicao;
 	import src.ast.CommandDecisao;
+	import src.ast.CommandEnquanto;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -121,6 +122,16 @@ public interface compiladorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCmdselecao(compiladorParser.CmdselecaoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link compiladorParser#cmdenquanto}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdenquanto(compiladorParser.CmdenquantoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link compiladorParser#cmdenquanto}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdenquanto(compiladorParser.CmdenquantoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link compiladorParser#expr}.
 	 * @param ctx the parse tree

@@ -11,6 +11,7 @@ grammar compilador;
 	import src.ast.CommandEscrita;
 	import src.ast.CommandAtribuicao;
 	import src.ast.CommandDecisao;
+	import src.ast.CommandEnquanto;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -31,6 +32,7 @@ grammar compilador;
 	private String _exprDecision;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
+	private ArrayList<AbstractCommand> lista;
 	
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
@@ -52,7 +54,7 @@ grammar compilador;
 prog	: 'programa' decl bloco  'fimprog;'
            {  program.setVarTable(symbolTable);
            	  program.setComandos(stack.pop());
-           	 
+
            } 
 		;
 		
@@ -101,7 +103,8 @@ bloco	: { curThread = new ArrayList<AbstractCommand>();
 cmd		:  cmdleitura  
  		|  cmdescrita 
  		|  cmdattrib
- 		|  cmdselecao  
+ 		|  cmdselecao
+		|  cmdenquanto 
 		;
 		
 cmdleitura	: 'leia' AP
@@ -138,8 +141,8 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                expr 
                SC
                {
-               	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
-               	 stack.peek().add(cmd);
+               	 	CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
+               	 	stack.peek().add(cmd);
                }
 			;
 			
@@ -173,6 +176,25 @@ cmdselecao  :  'se' AP
                    		stack.peek().add(cmd);
                    	}
                    )?
+            ;
+
+cmdenquanto :  'enquanto' AP
+                    ID    { _exprDecision = _input.LT(-1).getText(); }
+                    OPREL { _exprDecision += _input.LT(-1).getText(); }
+                    (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                    FP 
+                    ACH 
+                    { curThread = new ArrayList<AbstractCommand>(); 
+                      stack.push(curThread);
+                    }
+                    (cmd)+ 
+                    
+                    FCH 
+                    {
+                       lista = stack.pop();
+					   CommandEnquanto cmd = new CommandEnquanto(_exprDecision, lista);
+                   	   stack.peek().add(cmd);
+                    } 
             ;
 			
 expr		:  termo ( 

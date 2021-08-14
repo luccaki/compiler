@@ -4,13 +4,14 @@ package src.parser;
 	import src.datastructures.compiladorSymbol;
 	import src.datastructures.compiladorVariable;
 	import src.datastructures.compiladorSymbolTable;
-	import src.exceptions.compiladorException;
+	import src.exceptions.compiladorSemanticException;
 	import src.ast.compiladorProgram;
 	import src.ast.AbstractCommand;
 	import src.ast.CommandLeitura;
 	import src.ast.CommandEscrita;
 	import src.ast.CommandAtribuicao;
 	import src.ast.CommandDecisao;
+	import src.ast.CommandEnquanto;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -145,6 +146,18 @@ public class compiladorBaseListener implements compiladorListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdselecao(compiladorParser.CmdselecaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdenquanto(compiladorParser.CmdenquantoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdenquanto(compiladorParser.CmdenquantoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

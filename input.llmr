@@ -1,17 +1,20 @@
 programa
-   numero a, b;
-   texto  t1;
 
-   leia(a);
-   leia(b);
-   leia(t1)
+  numero a, b;
+  texto t;
   
-   escreva(t1)
-   se ( a > b ) {
-     escreva (a);
-   }
-   senao {
-     escreva (b);
-   }
-   escreva(a+b)
+  leia(a);
+  leia(b);
+  
+  enquanto(a < b){
+    a = a + 1;
+    escreva(a);
+  }
+
+  a = 2.1;
+
+  escreva(t);
+  escreva(a);
+  escreva(b);
+
 fimprog;

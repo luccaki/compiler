@@ -3,7 +3,7 @@ package src.main;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-import src.exceptions.compiladorException;
+import src.exceptions.compiladorSemanticException;
 import src.parser.compiladorLexer;
 import src.parser.compiladorParser;
 
@@ -37,7 +37,7 @@ public class MainClass {
 			parser.generateCode();
 			
 		}
-		catch(compiladorException ex) {
+		catch(compiladorSemanticException ex) {
 			System.err.println("Semantic error - "+ex.getMessage());
 		}
 		catch(Exception ex) {

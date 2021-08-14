@@ -12,6 +12,7 @@ package src.parser;
 	import src.ast.CommandAtribuicao;
 	import src.ast.CommandDecisao;
 	import src.ast.CommandEnquanto;
+	import src.ast.CommandFaca;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -122,6 +123,16 @@ public interface compiladorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCmdselecao(compiladorParser.CmdselecaoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link compiladorParser#cmdfaca}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdfaca(compiladorParser.CmdfacaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link compiladorParser#cmdfaca}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdfaca(compiladorParser.CmdfacaContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link compiladorParser#cmdenquanto}.
 	 * @param ctx the parse tree

@@ -12,6 +12,7 @@ grammar compilador;
 	import src.ast.CommandAtribuicao;
 	import src.ast.CommandDecisao;
 	import src.ast.CommandEnquanto;
+	import src.ast.CommandFaca;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -107,6 +108,7 @@ cmd		:  cmdleitura
  		|  cmdescrita 
  		|  cmdattrib
  		|  cmdselecao
+		|  cmdfaca 
 		|  cmdenquanto 
 		;
 		
@@ -179,6 +181,28 @@ cmdselecao  :  'se' AP
                    		stack.peek().add(cmd);
                    	}
                    )?
+            ;
+			
+cmdfaca :  'faca' ACH
+                    { curThread = new ArrayList<AbstractCommand>(); 
+                      stack.push(curThread);
+                    }
+                    (cmd)+ 
+
+                    FCH
+
+                    'enquanto'
+                    AP
+                    ID    { _exprDecision = _input.LT(-1).getText(); }
+                    OPREL { _exprDecision += _input.LT(-1).getText(); }
+                    (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                    FP 
+                    SC
+                    {
+                       lista = stack.pop();
+					   CommandFaca cmd = new CommandFaca(_exprDecision, lista);
+                   	   stack.peek().add(cmd);
+                    } 
             ;
 
 cmdenquanto :  'enquanto' AP

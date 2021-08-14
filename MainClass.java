@@ -14,6 +14,9 @@ c= _key.nextBoolean();
 d= _key.next().charAt(0);
 e= _key.nextInt();
 t = "teste";
+do {
+b = b+1;System.out.println(b);} while (b<a);
+
 while (a<b) {
 a = a+1;System.out.println(a);}
 

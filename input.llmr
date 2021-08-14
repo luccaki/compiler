@@ -13,12 +13,17 @@ inicio
   leia(e);
 
   t = "teste"; 
+
+  faca {
+      b = b + 1;
+      escreva(b);
+  }
+  enquanto(b < a);
   
   enquanto(a < b){
     a = a + 1;
     escreva(a);
   }
-
   
   se (a == b){
     escreva(t);

@@ -12,6 +12,7 @@ package src.parser;
 	import src.ast.CommandAtribuicao;
 	import src.ast.CommandDecisao;
 	import src.ast.CommandEnquanto;
+	import src.ast.CommandFaca;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -146,6 +147,18 @@ public class compiladorBaseListener implements compiladorListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdselecao(compiladorParser.CmdselecaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdfaca(compiladorParser.CmdfacaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdfaca(compiladorParser.CmdfacaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

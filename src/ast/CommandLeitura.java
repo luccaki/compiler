@@ -14,7 +14,25 @@ public class CommandLeitura extends AbstractCommand {
 	@Override
 	public String generateJavaCode() {
 		// TODO Auto-generated method stub
-		return id +"= _key." + (var.getType()==compiladorVariable.NUMBER? "nextDouble();": "nextLine();");
+        String next = "";
+        switch (var.getType()) {
+            case compiladorVariable.NUMBER:
+                next = "nextDouble();";
+                break;
+            case compiladorVariable.TEXT:
+                next = "nextLine();";
+                break;
+            case compiladorVariable.BOOLEAN:
+                next = "nextBoolean();";
+                break;
+            case compiladorVariable.CHAR:
+                next = "next().charAt(0);";
+                break;
+            default:
+                next = "nextInt();";
+                break;
+        }
+		return id +"= _key." + next;
 	}
 	@Override
 	public String toString() {

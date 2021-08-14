@@ -91,6 +91,9 @@ declaravar :  tipo ID  {
            
 tipo       : 'numero' { _tipo = compiladorVariable.NUMBER;  }
            | 'texto'  { _tipo = compiladorVariable.TEXT;  }
+           | 'booleano' { _tipo = compiladorVariable.BOOLEAN;  }
+           | 'caracter' { _tipo = compiladorVariable.CHAR;  }
+           | 'inteiro' { _tipo = compiladorVariable.INT;  }
            ;
         
 bloco	: { curThread = new ArrayList<AbstractCommand>(); 

@@ -2,9 +2,15 @@ inicio
 
   numero a, b;
   texto t;
+  booleano c;
+  caracter d;
+  inteiro e;
   
   leia(a);
   leia(b);
+  leia(c);
+  leia(d);
+  leia(e);
 
   t = "teste"; 
   
@@ -19,5 +25,9 @@ inicio
   }senao{
     escreva(b);
   }
+
+  escreva (c);
+  escreva (d);
+  escreva (e);
 
 fim

@@ -4,6 +4,9 @@ public class compiladorVariable extends compiladorSymbol {
 	
 	public static final int NUMBER=0;
 	public static final int TEXT  =1;
+	public static final int BOOLEAN =2;
+	public static final int CHAR =3;
+	public static final int INT =4;
 	
 	private int type;
 	private String value;
@@ -39,9 +42,14 @@ public class compiladorVariable extends compiladorSymbol {
        String str;
        if (type == NUMBER) {
     	   str = "double ";
-       }
-       else {
+       } else if (type == TEXT) {
     	   str = "String ";
+       } else if (type == BOOLEAN) {
+    	   str = "boolean ";
+       } else if (type == CHAR) {
+    	   str = "char ";
+       } else {
+    	   str = "int ";
        }
        return str + " "+super.name+";";
 	}
